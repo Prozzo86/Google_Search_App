@@ -1,0 +1,41 @@
+﻿@model SearchModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<form method="post" class="form-inline ">
+    <div class="col-sm-6" style="margin-left:200px">
+        <h3>Search From Database</h3>
+    <div class="form-group">
+        <input type="text" asp-for="SearchTerm" class="col-sm-2 form-control" placeholder="Enter search term">
+    </div><br />
+    <button type="submit" class="btn btn-lg btn-primary" style="float:right">Search From DB</button>
+    </div>
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+            <br />
+            <h3>Error Message: @Model.ErrorMessage</h3>
+    }
+
+    @if (Model.SearchResults != null)
+    {
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Url</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var result in Model.SearchResults)
+                {
+                            <tr>
+                                <td>@result.Id</td>
+                                <td>@result.Link</td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+    }
+
+</form>
